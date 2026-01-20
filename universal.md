@@ -353,15 +353,20 @@ PROJECT.md serves as:
 - A single source of truth for project specifications
 - A reference for architecture, components, and conventions
 
-### When to UPDATE PROJECT.md
+### **CRITICAL: When to UPDATE PROJECT.md**
+
+**MANDATORY CHECKPOINT**: Before ANY git commit, Claude MUST verify PROJECT.md is up-to-date with recent changes.
 
 1. **At Project Initialization**
    - Document initial project concept and goals
    - Define tech stack and architecture decisions
    - Outline planned components and structure
 
-2. **After Adding New Features**
+2. **After Adding New Features** ⚠️ MANDATORY
    - Add new components/modules to the structure
+   - Document new scripts/tools
+   - Update version numbers
+   - Add new dependencies
    - Update API endpoints or data models
    - Document new dependencies or integrations
 
@@ -461,6 +466,27 @@ VAR_NAME=description of what it's for
 - **Edit** existing descriptions to reflect current state
 - **Delete** sections that are no longer relevant
 - **Reorganize** structure to improve clarity
+
+### PRE-COMMIT CHECKLIST (MANDATORY)
+
+Before running `git commit`, Claude MUST verify:
+
+1. ✅ **PROJECT.md Updated?**
+   - [ ] Are new components documented?
+   - [ ] Are version numbers current?
+   - [ ] Are new dependencies listed?
+   - [ ] Is architecture section accurate?
+
+2. ✅ **TODO.md Updated?**
+   - [ ] Are completed tasks marked as done?
+   - [ ] Are new tasks added?
+   - [ ] Are decisions logged?
+
+3. ✅ **Only Then Commit**
+   - If both checks pass, proceed with commit
+   - If either fails, update the file(s) first
+
+**Violation Consequence**: If PROJECT.md or TODO.md are out of sync with code changes, the commit represents incomplete work and should be amended.
 
 ---
 
