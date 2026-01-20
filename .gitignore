@@ -1,0 +1,6 @@
+# IDE
+.idea/
+.vscode/
+
+# Claude local settings
+.claude/settings.local.json

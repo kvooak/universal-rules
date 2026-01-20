@@ -6,7 +6,14 @@
       "Bash(git commit --amend -m \"$\\(cat <<''EOF''\nInitial commit: Universal coding rules for AI-assisted development\n\n- universal.md: Core rules, anti-hallucination guidelines, project setup, TODO tracking\n- typescript.md: TypeScript-specific rules and best practices\n- python.md: Python-specific rules and best practices\n- clean-architecture.md: Clean Architecture principles and patterns\n- setup-rules.sh: Automation script for setting up rules in new projects\nEOF\n\\)\")",
       "Bash(git push:*)",
       "Bash(git add:*)",
-      "Bash(git commit:*)"
+      "Bash(git commit:*)",
+      "Bash(bash:*)",
+      "Bash(\"/c/Program Files/GitHub CLI/gh.exe\" repo create knowledge --public --source=. --remote=origin --description \"Long-lived knowledge system for ingesting large PDFs into a durable, auditable knowledge base\")",
+      "Bash(python -m pytest:*)",
+      "Bash(pip install:*)",
+      "Bash(powershell:*)",
+      "Bash(python scripts/extract_pdf.py:*)",
+      "Bash(python scripts/chunk_text.py:*)"
     ]
   }
 }

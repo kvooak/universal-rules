@@ -184,14 +184,16 @@ The test must clearly report:
 
 ## MANDATORY: Git Commit and Push Rules
 
-Claude MUST commit and push changes to GitHub whenever code changes are applied.
+**CRITICAL: Claude MUST commit and push changes to GitHub IMMEDIATELY after code changes are applied. This is non-negotiable.**
 
-### When to Commit
+### When to Commit (ALWAYS)
 
 1. **After ANY code change is applied** - Every edit, addition, or deletion of code files
 2. **After configuration changes** - Updates to config files, package.json, etc.
 3. **After creating new files** - New components, modules, utilities, tests
 4. **After refactoring** - Code restructuring, renaming, reorganization
+5. **After running scripts that generate output** - When extraction, chunking, or processing creates files
+6. **At the end of EVERY user request** - Before responding "done", ensure changes are committed and pushed
 
 ### Commit Message Format
 
@@ -237,11 +239,31 @@ git push
 
 ### What NOT to Commit
 
-- `.claude/` folder (should be in .gitignore)
 - `.env` files with secrets
 - `node_modules/`, `__pycache__/`, `venv/`
 - IDE settings (`.idea/`, `.vscode/` unless shared)
 - Build outputs (`dist/`, `build/`)
+- Large binary files (PDFs, images, videos) - use .gitignore
+- Source data folders (like `sources/`) that contain large files
+
+### Project-Specific .gitignore
+
+When a project has large files or data folders that should not be committed:
+
+1. **Add them to .gitignore BEFORE committing**
+2. **Common exclusions:**
+   - `sources/` - Raw input files (PDFs, data)
+   - `*.pdf`, `*.docx` - Large documents
+   - `data/` - Large datasets
+   - Outputs that can be regenerated
+
+### Verification Before Push
+
+Before pushing, verify:
+```bash
+git status  # Check what will be committed
+git diff --cached  # Review staged changes
+```
 
 ---
 
