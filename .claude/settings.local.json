@@ -1,0 +1,8 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(git init:*)",
+      "Bash(\"/c/Program Files/GitHub CLI/gh.exe\" repo create universal-rules --public --source=. --remote=origin --description \"Universal coding rules and standards for AI-assisted development\")"
+    ]
+  }
+}
