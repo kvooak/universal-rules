@@ -49,7 +49,24 @@ This file tracks:
 - Decisions made during discussions
 - Implementation status
 
-### Step 5: Add to .gitignore (MANDATORY)
+### Step 5: Create PROJECT.md for Project Documentation
+
+Create a `PROJECT.md` file in the `.claude` folder to document the project:
+
+```bash
+touch .claude/PROJECT.md
+```
+
+This file contains:
+- Project overview and purpose
+- Tech stack and architecture
+- Key components and their relationships
+- API contracts and data models
+- Configuration and environment requirements
+
+See "MANDATORY: PROJECT.md Documentation" section below for format and maintenance rules.
+
+### Step 6: Add to .gitignore (MANDATORY)
 
 The `.claude/` folder MUST be added to `.gitignore` to:
 - Keep rules in sync with the source (always get latest updates)
@@ -60,7 +77,7 @@ The `.claude/` folder MUST be added to `.gitignore` to:
 echo ".claude/" >> .gitignore
 ```
 
-### Step 6: Initialize Git and Create GitHub Repository
+### Step 7: Initialize Git and Create GitHub Repository
 
 Initialize git and create a GitHub repository for the project:
 
@@ -81,7 +98,7 @@ git push -u origin master
 
 **Source Location:** `C:\Users\Quang\projects\claude-projects\universal-rules\`
 
-**Setup Script:** Run `setup-rules.sh` from the source folder to automate Steps 1-6:
+**Setup Script:** Run `setup-rules.sh` from the source folder to automate Steps 1-7:
 
 ```bash
 bash C:\Users\Quang\projects\claude-projects\universal-rules\setup-rules.sh /path/to/your/project
@@ -226,6 +243,128 @@ Claude MUST maintain the `.claude/TODO.md` file throughout the project lifecycle
    - `[!]` High priority
    - `[?]` Needs clarification
    - `[~]` In progress
+
+---
+
+## MANDATORY: PROJECT.md Documentation
+
+Claude MUST maintain the `.claude/PROJECT.md` file as a living document that describes the project.
+
+### Purpose
+
+PROJECT.md serves as:
+- A structured prompt for Claude to understand the project context
+- A single source of truth for project specifications
+- A reference for architecture, components, and conventions
+
+### When to UPDATE PROJECT.md
+
+1. **At Project Initialization**
+   - Document initial project concept and goals
+   - Define tech stack and architecture decisions
+   - Outline planned components and structure
+
+2. **After Adding New Features**
+   - Add new components/modules to the structure
+   - Update API endpoints or data models
+   - Document new dependencies or integrations
+
+3. **After Architectural Changes**
+   - Update component relationships
+   - Revise data flow descriptions
+   - Modify tech stack information
+
+4. **After Refactoring**
+   - Update file/folder structure
+   - Revise component descriptions
+   - Update naming conventions if changed
+
+5. **When Requirements Change**
+   - Update project goals and scope
+   - Revise feature descriptions
+   - Modify constraints or requirements
+
+### PROJECT.md Format
+
+```markdown
+# Project: <project-name>
+
+## Overview
+> One-paragraph description of what this project does and its purpose.
+
+## Tech Stack
+- **Language**: [e.g., TypeScript 5.x]
+- **Framework**: [e.g., Next.js 14, FastAPI]
+- **Database**: [e.g., PostgreSQL, MongoDB]
+- **ORM/ODM**: [e.g., Prisma, SQLAlchemy]
+- **Styling**: [e.g., Tailwind CSS, styled-components]
+- **Testing**: [e.g., Vitest, pytest]
+
+## Architecture
+> Brief description of architectural pattern (e.g., Clean Architecture, MVC)
+
+### Directory Structure
+```
+/src
+  /components    # [description]
+  /services      # [description]
+  /utils         # [description]
+```
+
+## Key Components
+
+### Component Name
+- **Purpose**: What it does
+- **Location**: `/path/to/component`
+- **Dependencies**: What it depends on
+- **Used by**: What uses it
+
+## Data Models
+
+### ModelName
+```
+field1: type - description
+field2: type - description
+```
+
+## API Endpoints (if applicable)
+
+### `METHOD /endpoint`
+- **Purpose**: What it does
+- **Request**: { field: type }
+- **Response**: { field: type }
+
+## Environment Variables
+```
+VAR_NAME=description of what it's for
+```
+
+## Conventions
+- [Naming conventions]
+- [Code style preferences]
+- [Project-specific patterns]
+
+## Dependencies (key ones)
+- `package-name`: Why it's used
+
+---
+*Last updated: <date/session>*
+```
+
+### Documentation Rules
+
+1. **Be Concise** - Use bullet points and short descriptions
+2. **Be Accurate** - Update immediately when things change
+3. **Be Structured** - Follow the format consistently
+4. **Edit Freely** - Add, modify, or remove sections as needed
+5. **Keep Current** - Outdated docs are worse than no docs
+
+### Operations Allowed
+
+- **Add** new sections, components, endpoints, models
+- **Edit** existing descriptions to reflect current state
+- **Delete** sections that are no longer relevant
+- **Reorganize** structure to improve clarity
 
 ---
 
