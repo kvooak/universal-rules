@@ -116,7 +116,7 @@ def sync_rules_to_project(
                 if source_content == target_content:
                     stats["skipped"] += 1
                     if verbose:
-                        print(f"    ✓ {rule_file.name} (unchanged)")
+                        print(f"    [OK] {rule_file.name} (unchanged)")
                     continue
                 else:
                     action = "updated"
@@ -130,7 +130,7 @@ def sync_rules_to_project(
 
             if verbose or dry_run:
                 prefix = "[DRY RUN] " if dry_run else "    "
-                print(f"{prefix}✓ {rule_file.name} ({action})")
+                print(f"{prefix}[OK] {rule_file.name} ({action})")
 
         except Exception as e:
             stats["errors"] += 1
@@ -192,7 +192,7 @@ def main():
     print()
 
     if args.dry_run:
-        print("⚠️  DRY RUN MODE - No files will be copied")
+        print("[!]  DRY RUN MODE - No files will be copied")
         print()
 
     # Determine target projects
@@ -219,7 +219,7 @@ def main():
     }
 
     for project in projects:
-        print(f"📁 {project.name}")
+        print(f"[{project.name}]")
 
         stats = sync_rules_to_project(
             project,
@@ -242,7 +242,7 @@ def main():
             if stats["skipped"]:
                 actions.append(f"{stats['skipped']} unchanged")
             if stats["errors"]:
-                actions.append(f"❌ {stats['errors']} errors")
+                actions.append(f"[X] {stats['errors']} errors")
 
             if actions:
                 print(f"  {', '.join(actions)}")
@@ -264,12 +264,12 @@ def main():
     print(f"Files unchanged: {total_stats['skipped']}")
 
     if total_stats['errors']:
-        print(f"❌ Errors:       {total_stats['errors']}")
+        print(f"[!] Errors:      {total_stats['errors']}")
 
     print()
 
     if not args.dry_run and (total_stats['copied'] > 0 or total_stats['updated'] > 0):
-        print("✓ Rules synchronized successfully!")
+        print("[OK] Rules synchronized successfully!")
         print()
         print("Next steps:")
         print("1. Review changes in project .claude/ folders")
