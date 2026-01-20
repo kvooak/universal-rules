@@ -2,7 +2,11 @@
   "permissions": {
     "allow": [
       "Bash(git init:*)",
-      "Bash(\"/c/Program Files/GitHub CLI/gh.exe\" repo create universal-rules --public --source=. --remote=origin --description \"Universal coding rules and standards for AI-assisted development\")"
+      "Bash(\"/c/Program Files/GitHub CLI/gh.exe\" repo create universal-rules --public --source=. --remote=origin --description \"Universal coding rules and standards for AI-assisted development\")",
+      "Bash(git commit --amend -m \"$\\(cat <<''EOF''\nInitial commit: Universal coding rules for AI-assisted development\n\n- universal.md: Core rules, anti-hallucination guidelines, project setup, TODO tracking\n- typescript.md: TypeScript-specific rules and best practices\n- python.md: Python-specific rules and best practices\n- clean-architecture.md: Clean Architecture principles and patterns\n- setup-rules.sh: Automation script for setting up rules in new projects\nEOF\n\\)\")",
+      "Bash(git push:*)",
+      "Bash(git add:*)",
+      "Bash(git commit:*)"
     ]
   }
 }

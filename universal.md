@@ -60,15 +60,97 @@ The `.claude/` folder MUST be added to `.gitignore` to:
 echo ".claude/" >> .gitignore
 ```
 
+### Step 6: Initialize Git and Create GitHub Repository
+
+Initialize git and create a GitHub repository for the project:
+
+```bash
+git init
+gh repo create <project-name> --public --source=. --remote=origin
+```
+
+Then make the initial commit and push:
+
+```bash
+git add -A
+git commit -m "Initial commit: <brief project description>"
+git push -u origin master
+```
+
+**GitHub Account:** `kvooak` (https://github.com/kvooak)
+
 **Source Location:** `C:\Users\Quang\projects\claude-projects\universal-rules\`
 
-**Setup Script:** Run `setup-rules.sh` from the source folder to automate Steps 1-5:
+**Setup Script:** Run `setup-rules.sh` from the source folder to automate Steps 1-6:
 
 ```bash
 bash C:\Users\Quang\projects\claude-projects\universal-rules\setup-rules.sh /path/to/your/project
 ```
 
 **Note:** If the `.claude` folder already exists with rule files, skip Steps 1-2 and proceed to Step 3.
+
+---
+
+## MANDATORY: Git Commit and Push Rules
+
+Claude MUST commit and push changes to GitHub whenever code changes are applied.
+
+### When to Commit
+
+1. **After ANY code change is applied** - Every edit, addition, or deletion of code files
+2. **After configuration changes** - Updates to config files, package.json, etc.
+3. **After creating new files** - New components, modules, utilities, tests
+4. **After refactoring** - Code restructuring, renaming, reorganization
+
+### Commit Message Format
+
+```
+<type>: <short description>
+
+<optional body with more details>
+```
+
+**Types:**
+- `feat`: New feature
+- `fix`: Bug fix
+- `refactor`: Code restructuring without behavior change
+- `docs`: Documentation only
+- `style`: Formatting, whitespace (no code change)
+- `test`: Adding or updating tests
+- `chore`: Maintenance, dependencies, config
+
+**Examples:**
+```
+feat: Add user authentication endpoint
+fix: Resolve null pointer in payment processing
+refactor: Extract validation logic into separate module
+```
+
+### Commit Rules
+
+1. **NEVER include `Co-Authored-By` lines** - Do not add any co-author attribution
+2. **Keep commits atomic** - One logical change per commit
+3. **Write clear messages** - Describe what changed and why
+4. **Commit frequently** - Small, frequent commits over large batches
+5. **Always push after commit** - Keep remote in sync with local
+
+### Auto-Commit Workflow
+
+After applying code changes:
+
+```bash
+git add -A
+git commit -m "<type>: <description>"
+git push
+```
+
+### What NOT to Commit
+
+- `.claude/` folder (should be in .gitignore)
+- `.env` files with secrets
+- `node_modules/`, `__pycache__/`, `venv/`
+- IDE settings (`.idea/`, `.vscode/` unless shared)
+- Build outputs (`dist/`, `build/`)
 
 ---
 
@@ -308,6 +390,8 @@ Which approach would you prefer?
 
 ### Version Control
 
-- Write meaningful commit messages
+- Write meaningful commit messages (see Git Commit and Push Rules above)
 - Keep commits atomic and focused
 - Use feature branches for new development
+- **NEVER include `Co-Authored-By` lines in commits**
+- Commit and push after every code change
