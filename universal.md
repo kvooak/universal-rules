@@ -96,6 +96,24 @@ git push -u origin master
 
 **GitHub Account:** `kvooak` (https://github.com/kvooak)
 
+### Step 8: Create and Run Compliance Test
+
+On project initialization, create a compliance test that verifies:
+- All project requirements are met
+- All specified structures exist
+- All constraints are respected
+- All prohibitions are enforced
+
+```bash
+# Create test file
+touch tests/test_compliance.py  # or appropriate test file for the project
+
+# Run the test
+python -m pytest tests/test_compliance.py  # or appropriate test command
+```
+
+This test is MANDATORY on project initialization but does NOT need to run on every subsequent change.
+
 **Source Location:** `C:\Users\Quang\projects\claude-projects\universal-rules\`
 
 **Setup Script:** Run `setup-rules.sh` from the source folder to automate Steps 1-7:
@@ -105,6 +123,62 @@ bash C:\Users\Quang\projects\claude-projects\universal-rules\setup-rules.sh /pat
 ```
 
 **Note:** If the `.claude` folder already exists with rule files, skip Steps 1-2 and proceed to Step 3.
+
+---
+
+## MANDATORY: Compliance Testing on Initialization
+
+Every new project MUST have a compliance test created and run during initialization.
+
+### Purpose
+
+The compliance test verifies that:
+1. All project requirements specified by the user are implemented
+2. All mandatory structures (directories, files) exist
+3. All constraints and rules are respected
+4. All prohibitions are enforced (things that must NOT exist or happen)
+
+### When to Create
+
+- **On project initialization**: ALWAYS create compliance test
+- **On subsequent changes**: Test does NOT need to run automatically
+
+### Compliance Test Requirements
+
+The test MUST check:
+
+1. **Structural Compliance**
+   - Required directories exist
+   - Required files exist
+   - File naming conventions followed
+
+2. **Functional Compliance**
+   - Scripts have required functions/methods
+   - Contracts are implemented correctly
+   - Input/output formats match specifications
+
+3. **Prohibition Compliance**
+   - Forbidden patterns are NOT present
+   - Forbidden dependencies are NOT used
+   - Forbidden behaviors are NOT implemented
+
+4. **Documentation Compliance**
+   - Required documentation exists
+   - Documentation covers required topics
+
+### Test Location
+
+```
+project/
+└── tests/
+    └── test_compliance.py  # Main compliance test
+```
+
+### Test Output
+
+The test must clearly report:
+- PASS: Requirement met
+- FAIL: Requirement not met (with specific details)
 
 ---
 
