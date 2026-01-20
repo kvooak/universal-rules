@@ -126,6 +126,62 @@ bash C:\Users\Quang\projects\claude-projects\universal-rules\setup-rules.sh /pat
 
 ---
 
+## MANDATORY: Universal Rules Synchronization
+
+When rules in the `universal-rules/` source folder are updated, they MUST be synchronized to all project `.claude/` folders.
+
+### Sync Mechanism
+
+**Automatic Sync Script:** `universal-rules/sync-rules.py`
+
+```bash
+# Sync to specific project
+python universal-rules/sync-rules.py --project ../knowledge
+
+# Sync to all projects
+python universal-rules/sync-rules.py --all
+
+# Dry run (see what would be synced)
+python universal-rules/sync-rules.py --all --dry-run
+```
+
+### When to Sync Rules
+
+1. **After Updating Universal Rules**
+   - Any modification to universal.md, python.md, typescript.md, or clean-architecture.md
+   - Adding new rule files to universal-rules/
+   - Run sync IMMEDIATELY after committing rule changes
+
+2. **Before Starting Work on a Project**
+   - Ensure project has latest rules
+   - Run sync if rules haven't been updated recently
+
+3. **After Creating a New Project**
+   - Sync rules as part of project initialization
+   - Ensures new project starts with current rules
+
+### Sync Process
+
+The sync script:
+1. Scans universal-rules/ for all .md files
+2. Finds all projects with .claude/ directories
+3. Compares source and target files
+4. Copies updated/new files to project .claude/ folders
+5. Reports: copied, updated, unchanged, errors
+6. Preserves .gitignore (keeps .claude/ out of version control)
+
+### Rule File Lifecycle
+
+```
+1. Edit rule in universal-rules/*.md
+2. Commit to universal-rules repo
+3. Run: python sync-rules.py --all
+4. Rules propagate to all projects
+5. Projects use updated rules immediately
+```
+
+---
+
 ## MANDATORY: Compliance Testing on Initialization
 
 Every new project MUST have a compliance test created and run during initialization.
