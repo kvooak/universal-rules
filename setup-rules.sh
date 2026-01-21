@@ -47,17 +47,36 @@ else
     echo "[1/7] Created .claude folder"
 fi
 
-# Step 2: Copy all .md files (except TODO.md and PROJECT.md templates)
-MD_COUNT=$(find "$SCRIPT_DIR" -maxdepth 1 -name "*.md" ! -name "TODO-template.md" ! -name "PROJECT-template.md" | wc -l)
-for file in "$SCRIPT_DIR"/*.md; do
-    filename=$(basename "$file")
-    if [ "$filename" != "TODO-template.md" ] && [ "$filename" != "PROJECT-template.md" ]; then
-        cp "$file" "$CLAUDE_DIR/"
-    fi
-done
-echo "[2/7] Copied $MD_COUNT rule files to .claude/"
+# Step 2: Copy language-specific .md file
+# Detect project language
+LANGUAGE=""
+if [ -f "$TARGET_DIR/package.json" ]; then
+    LANGUAGE="typescript"
+elif [ -f "$TARGET_DIR/pyproject.toml" ] || [ -f "$TARGET_DIR/requirements.txt" ]; then
+    LANGUAGE="python"
+else
+    echo "[2/7] Could not detect project language (no package.json or pyproject.toml found)"
+    echo "       Skipping language-specific rules"
+    LANGUAGE=""
+fi
 
-# List copied files
+if [ -n "$LANGUAGE" ]; then
+    LANG_FILE="$SCRIPT_DIR/${LANGUAGE}.md"
+    if [ -f "$LANG_FILE" ]; then
+        cp "$LANG_FILE" "$CLAUDE_DIR/"
+        echo "[2/7] Copied $LANGUAGE.md rule file to .claude/"
+    else
+        echo "[2/7] Language-specific rules file not found: $LANGUAGE.md"
+    fi
+else
+    echo "[2/7] Skipped language-specific rules (language not detected)"
+fi
+
+# Always copy universal.md
+if [ -f "$SCRIPT_DIR/universal.md" ]; then
+    cp "$SCRIPT_DIR/universal.md" "$CLAUDE_DIR/"
+fi
+
 echo ""
 echo "     Copied files:"
 for file in "$CLAUDE_DIR"/*.md; do
